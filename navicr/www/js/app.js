@@ -3,54 +3,42 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('navigarcr', ['ionic', 'pascalprecht.translate', 'starter.controllers'])
+var app=angular.module('navigarcr', ['ionic', 'pascalprecht.translate'])
 
 
+app.config(function($stateProvider, $urlRouterProvider) {
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-      
-      
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-      
-      
-      
-      
-      //IDIOMAS
-       if(typeof navigator.globalization !== "undefined") {
-    navigator.globalization.getPreferredLanguage(function(language) {
-        $translate.use((language.value).split("-")[0]).then(function(data) {
-            console.log("SUCCESS -> " + data);
-        }, function(error) {
-            console.log("ERROR -> " + error);
-        });
-    }, null);
-}
-      
-      if(window.navigator && window.navigator.splashscreen) {
-      window.navigator.splashscreen.hide();
-    }
-      
-      
-  });
-})
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider.state('home', {
+      url: '/',
+      views: {
+        home: {
+          templateUrl: 'terms.html'
+        }
+      }
+    });
+
+    $stateProvider.state('info', {
+      url: '/info',
+      views: {
+        info: {
+          templateUrl: 'info.html'
+        }
+      }
+    });
+    
+ 
+    
+    
+});
 
 
 
 
 
 
-
-
-
-.config(function($translateProvider) {
+app.config(function($translateProvider) {
         $translateProvider.translations("en", {
             terms_nd_condi:"License Terms & Conditions",
              terms_1:"This app is offered free 'as is'.",
@@ -80,4 +68,9 @@ angular.module('navigarcr', ['ionic', 'pascalprecht.translate', 'starter.control
         $translateProvider.fallbackLanguage("es");
         
 });
+
+
+
+
+
 

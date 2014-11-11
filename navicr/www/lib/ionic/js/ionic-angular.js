@@ -31,6 +31,7 @@ var deprecated = {
       return fn.apply(this, arguments);
     };
   },
+  },
 
   field: function(msg, log, parent, field, val) {
     var called = false;
